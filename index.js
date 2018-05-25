@@ -21,7 +21,7 @@ var transporter = nodemailer.createTransport({
 
 
 // 特定日期的查询
-const pointOfTime = ['2018-05-26', '2018-05-27','2018-05-28', '2018-05-29','2018-05-30','2018-05-31'];
+const pointOfTime = ['2018-05-27', '2018-06-02','2018-06-03'];
 
 // 所有日期的查询
 
@@ -29,6 +29,7 @@ const pointAllDay = [
     '2018-05-23', '2018-05-24', '2018-05-25', '2018-05-26', '2018-05-27', '2018-05-28', '2018-05-29','2018-05-30','2018-05-31',
     '2018-06-01', '2018-06-02', '2018-06-03', '2018-06-04', '2018-06-05', '2018-06-06', '2018-06-07','2018-06-08','2018-06-09',
     '2018-06-10', '2018-06-11', '2018-06-12', '2018-06-13', '2018-06-14', '2018-06-15', '2018-06-17','2018-06-18','2018-06-19',
+    '2018-06-20','2018-06-21','2018-06-22','2018-06-23','2018-06-24','2018-06-25'
 ];
 
 // 查询api
@@ -56,10 +57,10 @@ const getSearch = (subDate) => {
             } = data
             if (maxNumAm > nowNumAm) {
                 console.log(subDate +'上午有号')
-                postJson(subDate, 1)
+                // postJson(subDate, 1)
             } else if(maxNumPm > nowNumPm) {
                 console.log(subDate + '下午有号')
-                postJson(subDate, 0)
+                // postJson(subDate, 0)
             } else {
                 console.log(subDate + '没号了')
             }
@@ -74,12 +75,13 @@ const getSearch = (subDate) => {
 
 let pxun = 0;
 function xunhuan () {
-    if (pointOfTime.length - 1 < pxun){
+    if (pointAllDay.length - 1 < pxun){
+        pxun = 0
         // xunhuana()
-        return;
+        // return;
     }
     setTimeout(() => {
-        getSearch(pointOfTime[pxun]);
+        getSearch(pointAllDay[pxun]);
         pxun++;
         xunhuan()
     }, 500)
@@ -90,7 +92,7 @@ xunhuan()
 let axun = 0;
 function xunhuana () {
     if (pointAllDay.length - 1 < axun){
-        return;
+        axun = 0;
     }
     setTimeout(() => {
         getSearch(pointAllDay[axun]);
